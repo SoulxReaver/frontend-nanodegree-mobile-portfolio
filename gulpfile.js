@@ -11,12 +11,12 @@ var paths = {
   images: 'img/**/*'
 };
 
-gulp.task('default', gulpSequence('clean', 'scripts', 'htmlclean', 'minify-css', 'imagemin', 'viewscripts', 'viewhtmlclean', 'viewminify-css', 'viewimagemin'));
+gulp.task('default', gulpSequence('clean', 'scripts', 'htmlclean', 'minify-css', 'imagemin'));
 // Not all tasks need to use streams 
 // A gulpfile is just another node program and you can use any package available on npm 
 gulp.task('clean', function() {
   // You can use multiple globbing patterns as you would with `gulp.src` 
-  return del(['build']);
+  return del(['dist']);
 });
 
 gulp.task('scripts', function() {
@@ -24,7 +24,7 @@ gulp.task('scripts', function() {
   // with sourcemaps all the way down 
   return gulp.src(paths.scripts)
       .pipe(uglify())
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('htmlclean', function() {
@@ -33,19 +33,19 @@ gulp.task('htmlclean', function() {
         protect: /<\!--%fooTemplate\b.*?%-->/g,
         edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
       }))
-    .pipe(gulp.dest('./build/'));
+    .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('minify-css', function() {
   return gulp.src('css/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('build/css'));
+    .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('imagemin', () =>
     gulp.src('img/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('build/img'))
+        .pipe(gulp.dest('dist/img'))
 );
 
 gulp.task('viewscripts', function() {
@@ -53,7 +53,7 @@ gulp.task('viewscripts', function() {
   // with sourcemaps all the way down 
   return gulp.src('views/js/*')
       .pipe(uglify())
-    .pipe(gulp.dest('./build/views/js'));
+    .pipe(gulp.dest('./dist/views/js'));
 });
 
 gulp.task('viewhtmlclean', function() {
@@ -62,17 +62,17 @@ gulp.task('viewhtmlclean', function() {
         protect: /<\!--%fooTemplate\b.*?%-->/g,
         edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
       }))
-    .pipe(gulp.dest('./build/views'));
+    .pipe(gulp.dest('./dist/views'));
 });
 
 gulp.task('viewminify-css', function() {
   return gulp.src('views/css/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./build/views/css'));
+    .pipe(gulp.dest('./dist/views/css'));
 });
 
 gulp.task('viewimagemin', () =>
     gulp.src('views/images/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./build/views/images'))
+        .pipe(gulp.dest('./dist/views/images'))
 );
