@@ -11,7 +11,7 @@ var paths = {
   images: 'img/**/*'
 };
 
-gulp.task('sequence-1', gulpSequence('clean', 'scripts', 'htmlclean', 'minify-css', 'imagemin', 'viewscripts', 'viewhtmlclean', 'viewminify-css', 'viewimagemin'));
+gulp.task('default', gulpSequence('clean', 'scripts', 'htmlclean', 'minify-css', 'imagemin', 'viewscripts', 'viewhtmlclean', 'viewminify-css', 'viewimagemin'));
 // Not all tasks need to use streams 
 // A gulpfile is just another node program and you can use any package available on npm 
 gulp.task('clean', function() {
@@ -53,7 +53,7 @@ gulp.task('viewscripts', function() {
   // with sourcemaps all the way down 
   return gulp.src('views/js/*')
       .pipe(uglify())
-    .pipe(gulp.dest('./build/view/js'));
+    .pipe(gulp.dest('./build/views/js'));
 });
 
 gulp.task('viewhtmlclean', function() {
@@ -62,17 +62,17 @@ gulp.task('viewhtmlclean', function() {
         protect: /<\!--%fooTemplate\b.*?%-->/g,
         edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
       }))
-    .pipe(gulp.dest('./build/view'));
+    .pipe(gulp.dest('./build/views'));
 });
 
 gulp.task('viewminify-css', function() {
   return gulp.src('views/css/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./build/view/css'));
+    .pipe(gulp.dest('./build/views/css'));
 });
 
 gulp.task('viewimagemin', () =>
     gulp.src('views/images/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./build/view/images'))
+        .pipe(gulp.dest('./build/views/images'))
 );
