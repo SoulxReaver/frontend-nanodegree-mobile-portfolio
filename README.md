@@ -10,17 +10,17 @@ https://soulxreaver.github.io/
 
 The project uses gulp tasks to minify CSS, HTML, images and JS files.
 
-#####Install Gulp
+####Install Gulp
 npm install -g gulp
 
-#####Install packages
+####Install packages
 npm i
 
-##### Publish changes
+#### Publish changes
 gulp
 
 
-#### Part 1: Optimize PageSpeed Insights score for index.html
+### Part 1: Optimize PageSpeed Insights score for index.html
 
 Goals
 
@@ -33,16 +33,16 @@ time to resize pizzas is less than 5ms using the pizza slider on the views/pizza
 
 
 ###Optimizations
-####Part 1: PageSpeed Insights score of > 90 for index.html
+###Part 1: PageSpeed Insights score of > 90 for index.html
 
 Add the HTML media="print" attribute to the external style sheet link for print styles.
 Add the HTML async attribute to all script tags
 Use Gulp task compress to minify HTML,CSS, uglify js.
 Use Gulp task imagemin to compress image.
 
-####Part 2: Optimize pizza for frame-rate
+###Part 2: Optimize pizza for frame-rate
 
-##### Before
+#### Before
 
 function changePizzaSizes(size) {
     for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
@@ -53,7 +53,7 @@ function changePizzaSizes(size) {
   }
 
 All the pizza are the same width so it only needs to calculated once
-##### After
+#### After
 
   var randomPizzaContainerElements = document.querySelectorAll(".randomPizzaContainer");
   var dx = determineDx(randomPizzaContainerElements[0], size);
@@ -65,7 +65,7 @@ All the pizza are the same width so it only needs to calculated once
     }
   }
 
-##### Before
+#### Before
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -87,7 +87,7 @@ function updatePositions() {
 }
 
 We only need to calculate 5 different phases for 100 pizza
-##### After
+#### After
 
 function updatePositions() {
   frame++;
@@ -113,7 +113,7 @@ function updatePositions() {
   }
 }
 
-### Final Result
+## Final Result
 
 Part 1: PageSpeed Insights 
 
