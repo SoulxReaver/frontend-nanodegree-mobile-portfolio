@@ -47,32 +47,3 @@ gulp.task('imagemin', () =>
         .pipe(imagemin())
         .pipe(gulp.dest('dist/img'))
 );
-
-gulp.task('viewscripts', function() {
-  // Minify and copy all JavaScript (except vendor scripts) 
-  // with sourcemaps all the way down 
-  return gulp.src('views/js/*')
-      .pipe(uglify())
-    .pipe(gulp.dest('./dist/views/js'));
-});
-
-gulp.task('viewhtmlclean', function() {
-  return gulp.src('views/pizza.html')
-    .pipe(htmlclean({
-        protect: /<\!--%fooTemplate\b.*?%-->/g,
-        edit: function(html) { return html.replace(/\begg(s?)\b/ig, 'omelet$1'); }
-      }))
-    .pipe(gulp.dest('./dist/views'));
-});
-
-gulp.task('viewminify-css', function() {
-  return gulp.src('views/css/*.css')
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./dist/views/css'));
-});
-
-gulp.task('viewimagemin', () =>
-    gulp.src('views/images/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('./dist/views/images'))
-);
