@@ -35,6 +35,7 @@ time to resize pizzas is less than 5ms using the pizza slider on the views/pizza
 ### Optimizations
 ### Part 1: PageSpeed Insights score of > 90 for index.html
 
+inline css for google fonts and style.css
 Add the HTML media="print" attribute to the external style sheet link for print styles.
 Add the HTML async attribute to all script tags
 Use Gulp task compress to minify HTML,CSS, uglify js.
@@ -117,7 +118,7 @@ function updatePositions() {
 
 Part 1: PageSpeed Insights 
 
-Mobile: 90/100 Desktop 91/100
+Mobile: 91/100 Desktop 93/100
 
 Part 2: fps
 
